@@ -20,21 +20,23 @@ string make_daytime_string() {
 
 int main() {
 	try {
-		boost::asio::io_service io_service;
 		//기본적으로 Boost Asio 프로그램은 하나의 IO Service 객체를 가진다.
-		tcp::acceptor acceptor(io_service, tcp::endpoint(tcp::v4(), 13));
+		boost::asio::io_service io_service;
+		
 		//TCP 프로토콜의 13번 포트로 연결을 받는 수동 소켓을 생성한다.
+		tcp::acceptor acceptor(io_service, tcp::endpoint(tcp::v4(), 13));
+		
 		while (1) {
+			// 소켓 객체를 생성해 연결을 기다린다.
 			tcp::socket socket(io_service);
 			acceptor.accept(socket);
-			// 소켓 객체를 생성해 연결을 기다린다.
 
-			string message = make_daytime_string();
 			// 연결이 완료되면 해당 클라이언트에게 보낼 메시지를 생성한다.
-
+			string message = make_daytime_string();
+			
+			// 해당 클라이언트에 메시지를 담아 전송한다.s
 			boost::system::error_code ignored_error;
 			boost::asio::write(socket, boost::asio::buffer(message), ignored_error);
-			// 해당 클라이언트에 메시지를 담아 전송한다.
 
 		} // 모든 클라이언트에 대해 무한정 반복 수행한다.
 	}
