@@ -40,7 +40,7 @@ int main(void) {
 				break;
 			else if (error)
 				throw boost::system::system_error(error);
-			// 버퍼에 담신 데이터를 화면에 출력한다.
+			// 버퍼에 담긴 데이터를 화면에 출력한다.
 			cout.write(buf.data(), len);
 		}
 	} 
