@@ -23,7 +23,7 @@ int main(void) {
 		// 도메인 이름을 TCP 종단점으로 바꾸기 위해 Resolver를 사용한다.
 		tcp::resolver resolver(io_service);
 		// 서버로는 로컬 서버, 서비스는 Daytime 프로토콜을 적어준다.
-		tcp::resolver::query query("localhost", "daytime");
+		tcp::resolver::query query("2.tcp.ngrok.io", "18947");
 		// DNS를 거쳐 IP 주소 및 포트 번호를 얻어온다.
 		tcp::resolver::iterator endpoint_iterator = resolver.resolve(query);
 		// 소켓 객체를 초기화하여 서버에 연결한다.
